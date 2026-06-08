@@ -324,7 +324,7 @@ if uploaded_files:
                 st.download_button(
                     label="📥 Export Hasil",
                     data=output,
-                    file_name="hasil_prediksi_opd.xlsx",
+                    file_name="Form Identifikasi Isi.xlsx",
                     mime=(
                         "application/vnd.openxmlformats-"
                         "officedocument.spreadsheetml.sheet"
