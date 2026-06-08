@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from pathlib import Path
 from utils.upload_ui import (upload_ui)
 from joblib import load
 from utils.prediction import (predict_top_opd)
@@ -12,16 +13,10 @@ from preprocessing.preprocessing import preprocess_text
 # =====================================
 # Load Model & TF-IDF
 # =====================================
-model = load("model/svm_model.pkl")
-tfidf = load("model/tfidf_vectorizer.pkl")
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# =====================================
-# Konfigurasi Halaman
-# =====================================
-st.set_page_config(
-    page_title="Klasifikasi OPD",
-    layout="wide"
-)
+model = load(BASE_DIR / "model" / "svm_model.pkl")
+tfidf = load(BASE_DIR / "model" / "tfidf_vectorizer.pkl")
 
 # =====================================
 # Header
@@ -149,6 +144,11 @@ if uploaded_files:
                 .replace(".xlsx", "")
             )
             split_name = file_name.split("-")
+            if len(split_name) < 2:
+                st.error(
+                    f"Format nama file tidak sesuai: {file.name}"
+                )
+                continue
             kecamatan = split_name[0].strip()
             kelurahan = split_name[1].strip()
             df["Kecamatan"] = kecamatan
@@ -183,6 +183,9 @@ if uploaded_files:
             "Sukun": "SK"
         }
         df["KodePrefix"] = df["Kecamatan"].map(mapping)
+        if df["KodePrefix"].isna().any():
+            st.error("Terdapat nama kecamatan yang tidak sesuai format.")
+            st.stop()        
         df["NoUrut"] = df.groupby("Kecamatan").cumcount() + 1
         df["Kode"] = df["KodePrefix"] + "." + df["NoUrut"].astype(str).str.zfill(2)
         df = df.drop(columns=["KodePrefix", "NoUrut"])

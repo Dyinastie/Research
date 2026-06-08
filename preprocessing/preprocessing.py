@@ -1,6 +1,7 @@
 import re
 import pandas as pd
-
+import nltk
+from pathlib import Path
 from nltk.tokenize import WordPunctTokenizer
 from nltk.corpus import stopwords
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
@@ -8,8 +9,11 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 # =====================================
 # Load Kamus Normalisasi
 # =====================================
+BASE_DIR = Path(__file__).resolve().parent
+
 norm_df = pd.read_csv(
-    "preprocessing/Kamus Normalisasi.csv", sep=';'
+    BASE_DIR / "Kamus Normalisasi.csv",
+    sep=";"
 )
 
 normalization_dict = {
@@ -21,6 +25,11 @@ normalization_dict = {
 # =====================================
 tokenizer = WordPunctTokenizer()
 
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+    
 stop_words = set(stopwords.words('indonesian'))
 
 factory = StemmerFactory()
