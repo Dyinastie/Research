@@ -143,7 +143,7 @@ if uploaded_files:
                 file.name
                 .replace(".xlsx", "")
             )
-            split_name = file_name.split("-")
+            split_name = file_name.split("-", 1)
             if len(split_name) < 2:
                 st.error(
                     f"Format nama file tidak sesuai: {file.name}"
@@ -322,7 +322,7 @@ if uploaded_files:
             with col_right:
 
                 st.download_button(
-                    label="📥 Export Hasil",
+                    label="Export Hasil",
                     data=output,
                     file_name="Form Identifikasi Isi.xlsx",
                     mime=(
