@@ -322,7 +322,7 @@ if uploaded_files:
             with col_right:
 
                 st.download_button(
-                    label="Export Hasil",
+                    label="Download Hasil",
                     data=output,
                     file_name="Form Identifikasi Isi.xlsx",
                     mime=(

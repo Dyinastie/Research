@@ -12,7 +12,7 @@ st.divider()
 st.subheader("📘 Panduan Penggunaan")
 
 st.markdown("""
-### Cara Menggunakan Aplikasi
+#### Cara Menggunakan Aplikasi
 1. Masuk ke menu **Klasifikasi**.
 2. Klik **Upload** dan pilih seluruh file Excel Identifikasi Permasalahan per kelurahan.
 3. Sistem akan otomatis melakukan proses:
@@ -81,5 +81,32 @@ Apabila tidak terdapat data usulan pada suatu kelurahan:
 st.image(
     "assets/contoh_file_kosong.png",
     caption="Contoh file tanpa data usulan",
+    use_container_width=True
+)
+
+# Contoh Penulisan File Yang Benar
+st.markdown("""
+#### Contoh Penulisan File Yang Benar
+""")
+
+st.image(
+    "assets/contoh_file_benar.png",
+    caption="Contoh Penulisan File Yang Benar",
+    use_container_width=True
+)
+
+# Contoh Penulisan File Yang Salah
+st.markdown("""
+#### Contoh Penulisan File Yang Salah
+
+File dianggap salah jika:
+
+- Terdapat nama kolom yang diubah atau dihapus.
+- Terdapat modifikasi pada struktur tabel, seperti melakukan "merge cell" atau menambahkan kolom baru.
+""")
+
+st.image(
+    "assets/contoh_file_salah.png",
+    caption="Contoh Penulisan File Yang Salah",
     use_container_width=True
 )
