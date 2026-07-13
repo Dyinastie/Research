@@ -21,7 +21,7 @@ tfidf = load(BASE_DIR / "model" / "tfidf_vectorizer.pkl")
 # =====================================
 # Header
 # =====================================
-st.title("📊 Klasifikasi Usulan Masyarakat Berdasarkan OPD")
+st.title("📊 Klasifikasi Usulan Masyarakat")
 
 st.divider()
 
